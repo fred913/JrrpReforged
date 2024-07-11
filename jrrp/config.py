@@ -39,6 +39,6 @@ class JrrpConfig(Serializable):
         "expr": "10 >= jrrp >= 1",
         "end": "……（没错，是百分制）",
     }, {
-        "expr": "True",
+        "expr": "jrrp == 0",
         "end": "……"
     }]
