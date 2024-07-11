@@ -2,16 +2,16 @@
     "id": "jrrp",
     "version": "3.0.0",
     "name": "Jrrp",
-    "description": "《今日人品》",
+    "description": "《今日人品》重制版",
     "author": [
-        "Huaji_MUR233"
+        "Huaji_MUR233",
+        "Sheng Fan"
     ],
-    "link": "https://github.com/HuajiMURsMC/jrrp",
+    "link": "https://github.com/fred913/JrrpReforged",
     "dependencies": {
         "mcdreforged": ">=2.1.4",
         "mc_uuid": ">=1.0.0"
     },
-
     "resources": [
         "LICENSE"
     ],
