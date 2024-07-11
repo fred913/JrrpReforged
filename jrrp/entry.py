@@ -5,7 +5,7 @@ from mcdreforged.api.command import Literal
 from mcdreforged.api.types import (CommandSource, PlayerCommandSource,
                                    PluginServerInterface)
 
-import mc_uuid
+from jrrp.helpers import McUuidModule
 
 from .config import JrrpConfig
 
@@ -22,6 +22,12 @@ def get_todays_luck(string: str):
 
 def register_jrrp_command(server: PluginServerInterface):
 
+    mc_uuid: McUuidModule | None = server.get_plugin_instance("mc_uuid")
+
+    if mc_uuid is None:
+        raise RuntimeError(
+            "mc_uuid plugin is not loaded, jrrp command will not work.")
+
     config = server.load_config_simple(os.path.join("config", "jrrp.json"),
                                        in_data_folder=False,
                                        target_class=JrrpConfig)
@@ -32,6 +38,7 @@ def register_jrrp_command(server: PluginServerInterface):
 
     def reply_todays_luck(src: CommandSource):
         if not isinstance(src, PlayerCommandSource):
+            src.reply("This command can only be used in-game by Players.")
             return
 
         online_res = mc_uuid.onlineUUID(src.player)
@@ -56,9 +63,7 @@ def register_jrrp_command(server: PluginServerInterface):
                 src.reply(msg)
 
     for command in config.command:
-        server.register_command(
-            Literal(command).requires(lambda src: src.is_player).runs(
-                reply_todays_luck))
+        server.register_command(Literal(command).runs(reply_todays_luck))
 
 
 def on_load(server: PluginServerInterface, old):
