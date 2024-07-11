@@ -9,7 +9,6 @@ class JrrpConfig(Serializable):
     end: str = ""
     title: bool = False
     command: List[str] = ["!!jrrp"]
-    stop_once_match: bool = True
     message: List[dict] = [{
         "expr": "jrrp == 100",
         "start": "！！！！！你今天的人品值是：",
